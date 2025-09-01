@@ -1,0 +1,12 @@
+image:
+  repository: jwt-demo-app
+  tag: dev
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+  nodePort: 30081

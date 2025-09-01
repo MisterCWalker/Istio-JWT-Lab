@@ -1,0 +1,14 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: jwt-lab
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      # App NodePort -> host 3000
+      - containerPort: 30081
+        hostPort: 3000
+        protocol: TCP
+      # Istio Ingress NodePort -> host 8080
+      - containerPort: 30080
+        hostPort: 8080
+        protocol: TCP
