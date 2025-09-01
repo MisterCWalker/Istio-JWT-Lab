@@ -1,0 +1,11 @@
+host: demo.localhost
+namespace: demo
+appSelector:
+  app.kubernetes.io/name: jwt-demo-app
+gatewaySelector:
+  istio: ingressgateway
+
+issuer: "https://demo-issuer.local"
+jwks: |
+  {}
+forwardOriginalToken: true

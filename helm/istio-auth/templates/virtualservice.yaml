@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: jwt-demo-vs
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts: [{{ .Values.host | quote }}]
+  gateways: ["jwt-demo-gw"]
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: jwt-demo-app.{{ .Values.namespace }}.svc.cluster.local
+            port:
+              number: 80

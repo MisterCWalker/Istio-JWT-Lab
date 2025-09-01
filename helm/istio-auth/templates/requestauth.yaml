@@ -1,0 +1,15 @@
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  name: jwt-demo-reqauth
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels: {{- toYaml .Values.appSelector | nindent 6 }}
+  jwtRules:
+    - issuer: {{ .Values.issuer | quote }}
+      jwks: |
+{{ .Values.jwks | indent 8 }}
+      {{- if .Values.forwardOriginalToken }}
+      forwardOriginalToken: true
+      {{- end }}

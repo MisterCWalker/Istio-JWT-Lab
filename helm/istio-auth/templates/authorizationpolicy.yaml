@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: jwt-demo-authz
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels: {{- toYaml .Values.appSelector | nindent 6 }}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            requestPrincipals: ["*"]   # only allow if JWT verified
+      to:
+        - operation:
+            paths: ["/private*"]

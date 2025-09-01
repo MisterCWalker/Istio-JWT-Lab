@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: jwt-demo-allow-public
+  namespace: demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jwt-demo-app
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            paths: ["/", "/public*", "/favicon.ico"]

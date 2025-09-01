@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: jwt-demo-gw
+  namespace: {{ .Values.namespace }}
+spec:
+  selector: {{- toYaml .Values.gatewaySelector | nindent 4 }}
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - {{ .Values.host | quote }}
